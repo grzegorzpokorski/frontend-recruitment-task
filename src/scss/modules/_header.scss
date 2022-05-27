@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 100%;
+
+  @media #{map-get($breakpoints-from, 'lg')} {
+    max-width: 380px;
+  }
+
+  &__title {
+    text-transform: capitalize;
+  }
+}

@@ -1,0 +1,17 @@
+.picture {
+  width: 100%;
+  overflow: hidden;
+
+  &--section-with-image {
+    @media #{map-get($breakpoints-from, 'lg')} {
+      max-width: 505px;
+      max-height: 330px;
+    }
+  }
+  &__image {
+    width: 100%;
+    height: auto;
+    object-position: 50% 50%;
+    object-fit: cover;
+  }
+}

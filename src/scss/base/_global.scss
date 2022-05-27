@@ -1,0 +1,50 @@
+:root {
+  font-size: 16px;
+
+  --font-family-serif: "Roboto", sans-serif;
+  --font-weight-bold: 700;
+  --font-weight-light: 300;
+
+  --gap-size: 0.75rem;
+
+  @include scss-map-to-css-vars($colors);
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+p,
+h2,
+picture,
+img {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 1rem;
+  font-family: var(--font-family-serif);
+  font-weight: var(--font-weight-light);
+  line-height: 1.5;
+}
+
+body {
+  background-color: var(--white);
+  color: var(--black);
+}
+
+h2 {
+  font-weight: var(--font-weight-bold);
+  font-size: 2.625rem;
+  line-height: 1.2;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+}

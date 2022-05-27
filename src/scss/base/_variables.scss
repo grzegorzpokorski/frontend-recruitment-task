@@ -1,0 +1,31 @@
+$colors: (
+  "black": #1a1a1a,
+  "white": #ffffff,
+  "primary": #e4c1ae,
+);
+
+$breakpoints-from: (
+  "sm": "(min-width: 576px)",
+  "md": "(min-width: 768px)",
+  "lg": "(min-width: 992px)",
+  "xl": "(min-width: 1200px)",
+  "xxl": "(min-width: 1480px)",
+);
+
+$breakpoints-to: (
+  "sm": "(max-width: 575px)",
+  "md": "(max-width: 767px)",
+  "lg": "(max-width: 991px)",
+  "xl": "(max-width: 1199px)",
+  "xxl": "(max-width: 1479px)",
+);
+
+$breakpoints-width: (
+  "sm": 540px,
+  "md": 720px,
+  "lg": 960px,
+  "xl": 1140px,
+  "xxl": "calc(1440px + var(--gap-size) * 2)",
+);
+
+$gap-size: 0.75rem;

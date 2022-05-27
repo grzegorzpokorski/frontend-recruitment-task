@@ -1,0 +1,13 @@
+.wrapper {
+  padding: 0 var(--gap-size);
+  margin: 0 auto;
+  width: calc(var(--wrapper-width) - var(--gap-size) * 2);
+
+  --wrapper-width: 100vw;
+
+  @each $name, $value in $breakpoints-from {
+    @media #{$value} {
+      --wrapper-width: #{map-get($breakpoints-width, $name)};
+    }
+  }
+}

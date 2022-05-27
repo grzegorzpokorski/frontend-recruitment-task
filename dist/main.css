@@ -1,2 +1,152 @@
+:root {
+  font-size: 16px;
+  --font-family-serif: "Roboto", sans-serif;
+  --font-weight-bold: 700;
+  --font-weight-light: 300;
+  --gap-size: 0.75rem;
+  --black: #1a1a1a;
+  --white: #ffffff;
+  --primary: #e4c1ae;
+}
 
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+p,
+h2,
+picture,
+img {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 1rem;
+  font-family: var(--font-family-serif);
+  font-weight: var(--font-weight-light);
+  line-height: 1.5;
+}
+
+body {
+  background-color: var(--white);
+  color: var(--black);
+}
+
+h2 {
+  font-weight: var(--font-weight-bold);
+  font-size: 2.625rem;
+  line-height: 1.2;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+.wrapper {
+  padding: 0 var(--gap-size);
+  margin: 0 auto;
+  width: calc(var(--wrapper-width) - var(--gap-size) * 2);
+  --wrapper-width: 100vw;
+}
+@media (min-width: 576px) {
+  .wrapper {
+    --wrapper-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .wrapper {
+    --wrapper-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .wrapper {
+    --wrapper-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .wrapper {
+    --wrapper-width: 1140px;
+  }
+}
+@media (min-width: 1480px) {
+  .wrapper {
+    --wrapper-width: calc(1440px + var(--gap-size) * 2);
+  }
+}
+
+.button {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: var(--font-weight-bold);
+  padding: 1em 2.5em;
+  border: none;
+  border-radius: 2em;
+  color: var(--white);
+  background-color: var(--primary);
+}
+.button:focus {
+  outline: 0.125em dashed red;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 100%;
+}
+@media (min-width: 992px) {
+  .header {
+    max-width: 380px;
+  }
+}
+.header__title {
+  text-transform: capitalize;
+}
+
+.picture {
+  width: 100%;
+  overflow: hidden;
+}
+@media (min-width: 992px) {
+  .picture--section-with-image {
+    max-width: 505px;
+    max-height: 330px;
+  }
+}
+.picture__image {
+  width: 100%;
+  height: auto;
+  -o-object-position: 50% 50%;
+     object-position: 50% 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.section-with-image {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  padding: 96px 0;
+}
+@media (min-width: 992px) {
+  .section-with-image {
+    flex-direction: row;
+    align-items: center;
+    gap: 95px;
+  }
+}
+.section-with-image__button {
+  background-color: var(--primary);
+}
 /*# sourceMappingURL=main.css.map */

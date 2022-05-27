@@ -17,27 +17,51 @@
     <link rel="stylesheet" href="/dist/main.css" />
   </head>
   <body>
-    <a href="#content">Skip to content</a>
-    <main id="content">
-      <section>
-        <figure>
-          <picture>
-            <source srcset="" />
-            <img
-              src="/images/sean-o-KMn4VEeEPR8-unsplash_1_s6zmfh_c_scale,w_480.jpg"
-              alt="beautiful sunset over the sea"
-              loading="lazy"
-            />
-          </picture>
-        </figure>
-        <header>
-          <h2>Lorem ipsum</h2>
+    <!-- <a href="#content">Skip to content</a> -->
+    <main id="content" class="wrapper">
+      <section class="section-with-image">
+        <picture class="picture picture--section-with-image">
+          <source
+            srcset="
+              /images/sean-o-KMn4VEeEPR8-unsplash_1_s6zmfh_ar_1_1,c_fill,g_auto__c_scale,w_200.jpg
+            "
+            media="(max-width: 201px)"
+          />
+          <source
+            srcset="
+              /images/sean-o-KMn4VEeEPR8-unsplash_1_s6zmfh_ar_1_1,c_fill,g_auto__c_scale,w_450.jpg
+            "
+            media="(max-width: 451px)"
+          />
+          <source
+            srcset="
+              /images/sean-o-KMn4VEeEPR8-unsplash_1_s6zmfh_ar_1_1,c_fill,g_auto__c_scale,w_630.jpg
+            "
+            media="(max-width: 631px)"
+          />
+          <source
+            srcset="
+              /images/sean-o-KMn4VEeEPR8-unsplash_1_s6zmfh_c_scale,w_784.jpg
+            "
+            media="(min-width: 767px)"
+          />
+          <img
+            src="/images/sean-o-KMn4VEeEPR8-unsplash_1_s6zmfh_c_scale,w_480.jpg"
+            alt="beautiful sunset over the sea"
+            loading="lazy"
+            class="picture__image"
+            width="505"
+            height="330"
+          />
+        </picture>
+        <header class="header">
+          <h2 class="header__title">Lorem ipsum</h2>
           <p>
             Infinitely scalable, feature-rich and cloud-native data management
             and protection for modern and legacy infrastructures and SaaS
             platforms, managed via a single app with no hardware required.
           </p>
-          <a href="#">Button</a>
+          <button class="button">Button</button>
         </header>
       </section>
     </main>
