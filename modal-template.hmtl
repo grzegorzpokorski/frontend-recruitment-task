@@ -1,0 +1,10 @@
+<aside class="modal">
+  <section class="header modal__content">
+    <button class="modal__close" aria-label="Zamknij popup">
+      <span class="modal__close__icon"></span>
+    </button>
+    <h3 class="modal__title">Alert!</h3>
+    <p>You have clicked <strong>X times</strong> to related button.</p>
+    <button class="button">Resetuj licznik</button>
+  </section>
+</aside>

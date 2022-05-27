@@ -19,8 +19,10 @@ html,
 body,
 p,
 h2,
+h3,
 picture,
-img {
+img,
+button {
   margin: 0;
   padding: 0;
 }
@@ -37,15 +39,17 @@ body {
   color: var(--black);
 }
 
-h2 {
-  font-weight: var(--font-weight-bold);
-  font-size: 2.625rem;
-  line-height: 1.2;
-}
-
 img {
   vertical-align: middle;
   border-style: none;
+}
+
+button {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  cursor: pointer;
+  border: none;
 }
 
 .wrapper {
@@ -81,10 +85,6 @@ img {
 }
 
 .button {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  cursor: pointer;
   font-size: 1rem;
   font-weight: var(--font-weight-bold);
   padding: 1em 2.5em;
@@ -105,11 +105,14 @@ img {
   width: 100%;
 }
 @media (min-width: 992px) {
-  .header {
+  .header--section-with-image {
     max-width: 380px;
   }
 }
-.header__title {
+.header__title, .modal__title {
+  font-weight: var(--font-weight-bold);
+  font-size: 2.625rem;
+  line-height: 1.2;
   text-transform: capitalize;
 }
 
@@ -133,6 +136,7 @@ img {
 }
 
 .section-with-image {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -166,5 +170,63 @@ img {
   width: auto;
   z-index: 100000;
   outline: 0.125em dashed red;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(18, 18, 18, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.modal__content {
+  position: relative;
+  width: 100%;
+  padding: 56px 96px;
+  background-color: var(--white);
+}
+@media (min-width: 992px) {
+  .modal__content {
+    max-width: 920px;
+  }
+}
+.modal__close {
+  position: absolute;
+  top: 46px;
+  right: 46px;
+  background-color: transparent;
+  width: 12px;
+  height: 12px;
+}
+.modal__close__icon {
+  position: relative;
+  display: block;
+  width: 12px;
+  height: 2px;
+  background-color: black;
+  transform: rotate(45deg) scale(1.01);
+}
+.modal__close__icon::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: black;
+  transform: rotate(90deg);
 }
 /*# sourceMappingURL=main.css.map */
