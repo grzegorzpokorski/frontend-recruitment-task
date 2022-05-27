@@ -6,6 +6,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 10;
 
   &__content {
     position: relative;
@@ -46,6 +47,10 @@
         background-color: black;
         transform: rotate(90deg);
       }
+    }
+
+    &:focus {
+      outline: 0.125em dashed red;
     }
   }
 

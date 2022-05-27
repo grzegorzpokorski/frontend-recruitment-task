@@ -191,6 +191,7 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 10;
 }
 .modal__content {
   position: relative;
@@ -228,5 +229,8 @@ button {
   height: 2px;
   background-color: black;
   transform: rotate(90deg);
+}
+.modal__close:focus {
+  outline: 0.125em dashed red;
 }
 /*# sourceMappingURL=main.css.map */
