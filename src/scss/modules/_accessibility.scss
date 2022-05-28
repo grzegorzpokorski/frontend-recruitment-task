@@ -1,5 +1,5 @@
 .skip-link {
-  position: relative;
+  position: fixed;
   display: inline-block;
   left: -9999em;
   top: -9999em;
@@ -21,4 +21,15 @@
     z-index: 100000;
     outline: 0.125em dashed red;
   }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
