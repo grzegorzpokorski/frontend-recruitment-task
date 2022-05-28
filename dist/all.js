@@ -101,6 +101,10 @@ const handleEscape = ({ key }) => {
 };
 
 const handleOpen = (section, sectionId, noIncrement = false) => {
+  // prevent to open multiple modals in the same time, and keep only the freshest
+  const activeModals = document.querySelectorAll('[role="dialog"]');
+  if (activeModals) activeModals.forEach((item) => closeModal(item));
+
   // increment counter
   if (!noIncrement) incrementCounter(getCounter(sectionId));
 
