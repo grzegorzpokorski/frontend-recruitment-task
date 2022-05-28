@@ -17,7 +17,7 @@ const createModal = (section, counter) => {
   const modalButtonClose = document.createElement("button");
   modalButtonClose.classList.value = "modal__close";
   modalButtonClose.dataset.name = "closeButton";
-  modalButtonClose.ariaLabel = "Zamknij popup";
+  modalButtonClose.ariaLabel = "Close popup";
 
   // aside.modal > section.header.modal__content > button.modal__close > span.modal__close__icon
   const modalCloseIcon = document.createElement("span");
@@ -45,7 +45,7 @@ const createModal = (section, counter) => {
     const modalButtonReset = document.createElement("button");
     modalButtonReset.classList.value = "button";
     modalButtonReset.dataset.name = "resetButton";
-    modalButtonReset.innerHTML = "Resetuj licznik";
+    modalButtonReset.innerHTML = "Reset counter";
 
     modalSection.appendChild(modalButtonReset);
   }
