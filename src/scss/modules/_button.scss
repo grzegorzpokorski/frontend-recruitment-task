@@ -1,4 +1,8 @@
 .button {
+  --button-background: var(--primary);
+  --button-background-hover: var(--primary-darken);
+  --button-color: var(--white);
+
   font-size: 1rem;
   font-weight: var(--font-weight-bold);
 
@@ -7,10 +11,16 @@
   border: none;
   border-radius: 2em;
 
-  color: var(--white);
-  background-color: var(--primary);
+  color: var(--button-color);
+  background-color: var(--button-background);
+
+  &:hover,
+  &:focus {
+    background-color: var(--button-background-hover);
+  }
 
   &--red {
-    background-color: var(--red);
+    --button-background: var(--red);
+    --button-background-hover: var(--red-darken);
   }
 }

@@ -7,7 +7,7 @@
 
   --gap-size: 0.75rem;
 
-  @include scss-map-to-css-vars($colors);
+  @include colors($colors);
 }
 
 *,

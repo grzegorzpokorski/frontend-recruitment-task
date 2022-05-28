@@ -1,5 +1,7 @@
-@mixin scss-map-to-css-vars($map) {
+@mixin colors($map) {
   @each $name, $value in $map {
     --#{$name}: #{$value};
+    --#{$name}-darken: #{darken($value, 10%)};
+    --#{$name}-lighten: #{lighten($value, 10%)};
   }
 }
