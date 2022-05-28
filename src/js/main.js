@@ -101,8 +101,6 @@ const handleOpen = (section, sectionId, noIncrement = false) => {
   // add closing function
   modal.addEventListener("click", (e) => handleClose(e, modal));
 
-  const closeButton = modal.querySelector('[data-name="closeButton"]');
-
   // add reset counter function
   modal.addEventListener("click", ({ target }) => {
     if (target === modal.querySelector('[data-name="resetButton"]')) {
