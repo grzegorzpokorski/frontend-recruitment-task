@@ -50,3 +50,9 @@ button {
   cursor: pointer;
   border: none;
 }
+
+a:focus,
+button:focus {
+  outline: 0.125rem dashed red;
+  outline-offset: 0.25rem;
+}

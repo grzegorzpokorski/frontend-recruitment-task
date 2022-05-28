@@ -49,10 +49,6 @@
         transform: rotate(90deg);
       }
     }
-
-    &:focus {
-      outline: 0.125em dashed red;
-    }
   }
 
   &__title {

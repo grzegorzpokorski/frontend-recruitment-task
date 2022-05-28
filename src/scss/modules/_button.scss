@@ -9,8 +9,4 @@
 
   color: var(--white);
   background-color: var(--primary);
-
-  &:focus {
-    outline: 0.125em dashed red;
-  }
 }
