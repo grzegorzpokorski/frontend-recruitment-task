@@ -3,11 +3,14 @@
 // all section occuring in html
 const sections = document.querySelectorAll("section.section-with-image");
 
-const createModal = (section, counter) => {
+const createModal = (section, sectionId, counter) => {
   // aside.modal
   const modal = document.createElement("aside");
   modal.classList.value = "modal";
   modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-labelledby", `${sectionId}-title`);
+  modal.setAttribute("aria-describedby", `${sectionId}-describe`);
+  modal.setAttribute("aria-modal", "true");
 
   // aside.modal > section.header.modal__content
   const modalSection = document.createElement("section");
@@ -24,13 +27,15 @@ const createModal = (section, counter) => {
   modalCloseIcon.classList.value = "modal__close__icon";
 
   // aside.modal > section.header.modal__content > h3.modal__title
-  const modalTitle = document.createElement("h3");
+  const modalTitle = document.createElement("h2");
   modalTitle.classList.value = "modal__title";
   modalTitle.innerText = "Alert";
+  modalTitle.setAttribute("id", `${sectionId}-title`);
 
   // aside.modal > section.header.modal__content > p
   const modalInformation = document.createElement("p");
   modalInformation.innerHTML = `You have clicked <strong>${counter.value} times</strong> to related button.`;
+  modalInformation.setAttribute("id", `${sectionId}-describe`);
 
   // append icon to close button
   modalButtonClose.appendChild(modalCloseIcon);
@@ -43,7 +48,7 @@ const createModal = (section, counter) => {
   if (counter.value > 5) {
     //aside.modal > section.header.modal__content > button.button[data-name="resetCounter"]
     const modalButtonReset = document.createElement("button");
-    modalButtonReset.classList.value = "button";
+    modalButtonReset.classList.value = "button button--red";
     modalButtonReset.dataset.name = "resetButton";
     modalButtonReset.innerHTML = "Reset counter";
 
@@ -109,7 +114,7 @@ const handleOpen = (section, sectionId, noIncrement = false) => {
   if (!noIncrement) incrementCounter(getCounter(sectionId));
 
   // create modal
-  const modal = createModal(section, getCounter(sectionId));
+  const modal = createModal(section, sectionId, getCounter(sectionId));
 
   // set focus to freshly created modal
   modal.focus();

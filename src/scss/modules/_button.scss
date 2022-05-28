@@ -9,4 +9,8 @@
 
   color: var(--white);
   background-color: var(--primary);
+
+  &--red {
+    background-color: var(--red);
+  }
 }
