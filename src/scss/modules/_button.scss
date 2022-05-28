@@ -23,4 +23,8 @@
     --button-background: var(--red);
     --button-background-hover: var(--red-darken);
   }
+
+  &--margin-top {
+    margin-top: 0.5rem;
+  }
 }
