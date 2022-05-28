@@ -56,3 +56,7 @@ button:focus {
   outline: 0.125rem dashed red;
   outline-offset: 0.25rem;
 }
+
+strong {
+  font-weight: var(--font-weight-bold);
+}
