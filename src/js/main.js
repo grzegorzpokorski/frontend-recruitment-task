@@ -7,6 +7,7 @@ const createModal = (section, counter) => {
   // aside.modal
   const modal = document.createElement("aside");
   modal.classList.value = "modal";
+  modal.setAttribute("role", "dialog");
 
   // aside.modal > section.header.modal__content
   const modalSection = document.createElement("section");
