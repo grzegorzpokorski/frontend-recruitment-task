@@ -152,7 +152,7 @@ button {
 }
 
 .skip-link {
-  position: relative;
+  position: fixed;
   display: inline-block;
   left: -9999em;
   top: -9999em;
@@ -197,6 +197,7 @@ button {
   position: relative;
   width: 100%;
   padding: 56px 96px;
+  overflow: auto;
   background-color: var(--white);
 }
 @media (min-width: 992px) {
