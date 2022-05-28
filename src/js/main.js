@@ -77,15 +77,26 @@ const handleClose = ({ target }, modal) => {
   const closeButton = modal.querySelector('[data-name="closeButton"]');
 
   if (target === modal || target === closeButton) {
-    modal.remove();
+    closeModal(modal);
   } else {
     do {
       if (target === closeButton) {
-        modal.remove();
+        closeModal(modal);
         return;
       }
       target = target.parentNode;
     } while (target != null);
+  }
+};
+
+const closeModal = (modal) => {
+  modal.remove();
+  window.removeEventListener("keydown", handleEscape, true);
+};
+
+const handleEscape = ({ key }) => {
+  if (key === "Escape") {
+    closeModal(document.querySelector('[role="dialog"]'));
   }
 };
 
@@ -101,12 +112,13 @@ const handleOpen = (section, sectionId, noIncrement = false) => {
 
   // add closing function
   modal.addEventListener("click", (e) => handleClose(e, modal));
+  window.addEventListener("keydown", handleEscape, true);
 
   // add reset counter function
   modal.addEventListener("click", ({ target }) => {
     if (target === modal.querySelector('[data-name="resetButton"]')) {
       resetCounter(sectionId);
-      modal.remove();
+      closeModal(modal);
       handleOpen(section, sectionId, true);
     }
   });
