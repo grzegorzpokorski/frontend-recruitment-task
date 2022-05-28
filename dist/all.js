@@ -91,10 +91,10 @@ const handleClose = ({ target }, modal) => {
 
 const closeModal = (modal) => {
   modal.remove();
-  window.removeEventListener("keydown", handleEscape, true);
+  window.removeEventListener("keydown", handleEscapeKeyPress, true);
 };
 
-const handleEscape = ({ key }) => {
+const handleEscapeKeyPress = ({ key }) => {
   if (key === "Escape") {
     closeModal(document.querySelector('[role="dialog"]'));
   }
@@ -116,7 +116,7 @@ const handleOpen = (section, sectionId, noIncrement = false) => {
 
   // add closing function
   modal.addEventListener("click", (e) => handleClose(e, modal));
-  window.addEventListener("keydown", handleEscape, true);
+  window.addEventListener("keydown", handleEscapeKeyPress, true);
 
   // add reset counter function
   modal.addEventListener("click", ({ target }) => {
