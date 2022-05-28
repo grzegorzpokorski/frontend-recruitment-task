@@ -10,15 +10,15 @@
 
   &__content {
     position: relative;
-
-    width: 100%;
-    padding: 56px 96px;
     overflow: auto;
+    max-width: calc(100% - var(--gap-size) * 2);
+    padding: 4rem 3rem;
 
     background-color: var(--white);
 
     @media #{map-get($breakpoints-from, 'lg')} {
       max-width: 920px;
+      padding: 56px 96px;
     }
   }
 
