@@ -1,1 +1,147 @@
-"use strict";const sections=document.querySelectorAll("section.section-with-image"),createModal=(e,t,a)=>{const l=document.createElement("aside"),n=(l.classList.value="modal",l.setAttribute("role","dialog"),l.setAttribute("aria-labelledby",t+"-title"),l.setAttribute("aria-describedby",t+"-describe"),l.setAttribute("aria-modal","true"),document.createElement("section")),o=(n.classList.value="header modal__content",document.createElement("button")),s=(o.classList.value="modal__close",o.dataset.name="closeButton",o.ariaLabel="Close popup",document.createElement("span")),r=(s.classList.value="modal__close__icon",document.createElement("h2")),d=(r.classList.value="modal__title",r.innerText="Alert",r.setAttribute("id",t+"-title"),document.createElement("p"));if(d.innerHTML=`You have clicked <strong>${a.value} times</strong> to related button.`,d.setAttribute("id",t+"-describe"),o.appendChild(s),n.appendChild(o),n.appendChild(r),n.appendChild(d),5<a.value){const c=document.createElement("button");c.classList.value="button button--red",c.dataset.name="resetButton",c.innerHTML="Reset counter",n.appendChild(c)}return l.appendChild(n),e.appendChild(l),l},getCounter=e=>localStorage.getItem(e)?{id:e,value:parseInt(localStorage.getItem(e))}:{id:e,value:0},incrementCounter=({id:e,value:t})=>{localStorage.setItem(e,t+1)},resetCounter=e=>{localStorage.setItem(e,0)},handleClose=({target:e},t)=>{var a=t.querySelector('[data-name="closeButton"]');if(e===t||e===a)closeModal(t);else do{if(e===a)return void closeModal(t)}while(null!=(e=e.parentNode))},closeModal=e=>{e.remove(),window.removeEventListener("keydown",handleEscapeKeyPress,!0)},handleEscapeKeyPress=({key:e})=>{"Escape"===e&&closeModal(document.querySelector('[role="dialog"]'))},handleOpen=(t,a,e=!0)=>{const l=document.querySelectorAll('[role="dialog"]'),n=(l&&l.forEach(e=>closeModal(e)),e&&incrementCounter(getCounter(a)),createModal(t,a,getCounter(a)));n.focus(),n.addEventListener("click",e=>handleClose(e,n)),window.addEventListener("keydown",handleEscapeKeyPress,!0),n.addEventListener("click",({target:e})=>{e===n.querySelector('[data-name="resetButton"]')&&(resetCounter(a),closeModal(n),handleOpen(t,a,!1))})};sections.forEach((e,t)=>{const a="swi"+t,l=(e.dataset.name=a,e.querySelector('[data-name="openButton"]'));l.addEventListener("click",()=>{handleOpen(e,a)})});
+"use strict";
+
+// all section occuring in html
+const sections = document.querySelectorAll("section.section-with-image");
+
+const createModal = (section, sectionId, counter) => {
+  // aside.modal
+  const modal = document.createElement("aside");
+  modal.classList.value = "modal";
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-labelledby", `${sectionId}-title`);
+  modal.setAttribute("aria-describedby", `${sectionId}-describe`);
+  modal.setAttribute("aria-modal", "true");
+
+  // aside.modal > section.header.modal__content
+  const modalSection = document.createElement("section");
+  modalSection.classList.value = "header modal__content";
+
+  // aside.modal > section.header.modal__content > button.modal__close
+  const modalButtonClose = document.createElement("button");
+  modalButtonClose.classList.value = "modal__close";
+  modalButtonClose.dataset.name = "closeButton";
+  modalButtonClose.ariaLabel = "Close popup";
+
+  // aside.modal > section.header.modal__content > button.modal__close > span.modal__close__icon
+  const modalCloseIcon = document.createElement("span");
+  modalCloseIcon.classList.value = "modal__close__icon";
+
+  // aside.modal > section.header.modal__content > h3.modal__title
+  const modalTitle = document.createElement("h2");
+  modalTitle.classList.value = "modal__title";
+  modalTitle.innerText = "Alert";
+  modalTitle.setAttribute("id", `${sectionId}-title`);
+
+  // aside.modal > section.header.modal__content > p
+  const modalInformation = document.createElement("p");
+  modalInformation.innerHTML = `You have clicked <strong>${counter.value} times</strong> to related button.`;
+  modalInformation.setAttribute("id", `${sectionId}-describe`);
+
+  // append icon to close button
+  modalButtonClose.appendChild(modalCloseIcon);
+
+  // appending elements to modal
+  modalSection.appendChild(modalButtonClose);
+  modalSection.appendChild(modalTitle);
+  modalSection.appendChild(modalInformation);
+
+  if (counter.value > 5) {
+    //aside.modal > section.header.modal__content > button.button[data-name="resetCounter"]
+    const modalButtonReset = document.createElement("button");
+    modalButtonReset.classList.value = "button button--red";
+    modalButtonReset.dataset.name = "resetButton";
+    modalButtonReset.innerHTML = "Reset counter";
+
+    modalSection.appendChild(modalButtonReset);
+  }
+
+  // append modal to section
+  modal.appendChild(modalSection);
+  section.appendChild(modal);
+
+  return modal;
+};
+
+const getCounter = (sectionId) => {
+  if (localStorage.getItem(sectionId)) {
+    return { id: sectionId, value: parseInt(localStorage.getItem(sectionId)) };
+  } else {
+    return { id: sectionId, value: 0 };
+  }
+};
+
+const incrementCounter = ({ id, value }) => {
+  localStorage.setItem(id, value + 1);
+};
+
+const resetCounter = (id) => {
+  localStorage.setItem(id, 0);
+};
+
+const handleClose = ({ target }, modal) => {
+  const closeButton = modal.querySelector('[data-name="closeButton"]');
+
+  if (target === modal || target === closeButton) {
+    closeModal(modal);
+  } else {
+    do {
+      if (target === closeButton) {
+        closeModal(modal);
+        return;
+      }
+      target = target.parentNode;
+    } while (target != null);
+  }
+};
+
+const closeModal = (modal) => {
+  modal.remove();
+  window.removeEventListener("keydown", handleEscapeKeyPress, true);
+};
+
+const handleEscapeKeyPress = ({ key }) => {
+  if (key === "Escape") {
+    closeModal(document.querySelector('[role="dialog"]'));
+  }
+};
+
+const handleOpen = (section, sectionId, increment = true) => {
+  // prevent to open multiple modals in the same time, and keep only the freshest
+  const activeModals = document.querySelectorAll('[role="dialog"]');
+  if (activeModals) activeModals.forEach((item) => closeModal(item));
+
+  // increment counter
+  if (increment) incrementCounter(getCounter(sectionId));
+
+  // create modal
+  const modal = createModal(section, sectionId, getCounter(sectionId));
+
+  // set focus to freshly created modal
+  modal.focus();
+
+  // add closing function
+  modal.addEventListener("click", (e) => handleClose(e, modal));
+  window.addEventListener("keydown", handleEscapeKeyPress, true);
+
+  // add reset counter function
+  modal.addEventListener("click", ({ target }) => {
+    if (target === modal.querySelector('[data-name="resetButton"]')) {
+      resetCounter(sectionId);
+      closeModal(modal);
+      handleOpen(section, sectionId, false);
+    }
+  });
+};
+
+// For each section-with-image module ...
+sections.forEach((section, i) => {
+  // add unique id,
+  const sectionId = `swi${i}`;
+  section.dataset.name = sectionId;
+
+  // and add opening funciton
+  const openButton = section.querySelector('[data-name="openButton"]');
+  openButton.addEventListener("click", () => {
+    handleOpen(section, sectionId);
+  });
+});
