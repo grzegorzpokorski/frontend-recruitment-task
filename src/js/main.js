@@ -105,13 +105,13 @@ const handleEscapeKeyPress = ({ key }) => {
   }
 };
 
-const handleOpen = (section, sectionId, noIncrement = false) => {
+const handleOpen = (section, sectionId, increment = true) => {
   // prevent to open multiple modals in the same time, and keep only the freshest
   const activeModals = document.querySelectorAll('[role="dialog"]');
   if (activeModals) activeModals.forEach((item) => closeModal(item));
 
   // increment counter
-  if (!noIncrement) incrementCounter(getCounter(sectionId));
+  if (increment) incrementCounter(getCounter(sectionId));
 
   // create modal
   const modal = createModal(section, sectionId, getCounter(sectionId));
@@ -128,7 +128,7 @@ const handleOpen = (section, sectionId, noIncrement = false) => {
     if (target === modal.querySelector('[data-name="resetButton"]')) {
       resetCounter(sectionId);
       closeModal(modal);
-      handleOpen(section, sectionId, true);
+      handleOpen(section, sectionId, false);
     }
   });
 };
