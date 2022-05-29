@@ -22,6 +22,7 @@ const createModal = (counter, sectionId) => {
   // aside.modal > section.header.modal__content > button.modal__close > span.modal__close__icon
   const modalCloseIcon = document.createElement("span");
   modalCloseIcon.classList.value = "modal__close__icon";
+  modalCloseIcon.setAttribute("aria-hidden", "true");
 
   // aside.modal > section.header.modal__content > h3.modal__title
   const modalTitle = document.createElement("h2");
