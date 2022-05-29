@@ -1,10 +1,7 @@
 "use strict";
 
-// all section occuring in html
-const sections = document.querySelectorAll("section.section-with-image");
-
-const createModal = (section, sectionId, counter) => {
-  // aside.modal
+// crete modal element and return it
+const createModal = (counter, sectionId) => {
   const modal = document.createElement("aside");
   modal.classList.value = "modal";
   modal.setAttribute("role", "dialog");
@@ -55,18 +52,43 @@ const createModal = (section, sectionId, counter) => {
     modalSection.appendChild(modalButtonReset);
   }
 
-  // append modal to section
   modal.appendChild(modalSection);
-  section.appendChild(modal);
 
   return modal;
 };
 
-const getCounter = (sectionId) => {
-  if (localStorage.getItem(sectionId)) {
-    return { id: sectionId, value: parseInt(localStorage.getItem(sectionId)) };
+const handleCloseModal = ({ target }, modal) => {
+  const closeButton = modal.querySelector('[data-name="closeButton"]');
+
+  if (target === modal || target === closeButton) {
+    removeModal(modal);
   } else {
-    return { id: sectionId, value: 0 };
+    do {
+      if (target === closeButton) {
+        removeModal(modal);
+        return;
+      }
+      target = target.parentNode;
+    } while (target != null);
+  }
+};
+
+const handleEscapeKeyPress = ({ key }) => {
+  if (key === "Escape") {
+    removeModal(document.querySelector('[role="dialog"]'));
+  }
+};
+
+const removeModal = (modal) => {
+  modal.remove();
+  window.removeEventListener("keydown", handleEscapeKeyPress);
+};
+
+const getCounter = (id) => {
+  if (localStorage.getItem(id)) {
+    return { id: id, value: parseInt(localStorage.getItem(id)) };
+  } else {
+    return { id: id, value: 0 };
   }
 };
 
@@ -78,70 +100,48 @@ const resetCounter = (id) => {
   localStorage.setItem(id, 0);
 };
 
-const handleClose = ({ target }, modal) => {
-  const closeButton = modal.querySelector('[data-name="closeButton"]');
-
-  if (target === modal || target === closeButton) {
-    closeModal(modal);
-  } else {
-    do {
-      if (target === closeButton) {
-        closeModal(modal);
-        return;
-      }
-      target = target.parentNode;
-    } while (target != null);
-  }
-};
-
-const closeModal = (modal) => {
-  modal.remove();
-  window.removeEventListener("keydown", handleEscapeKeyPress, true);
-};
-
-const handleEscapeKeyPress = ({ key }) => {
-  if (key === "Escape") {
-    closeModal(document.querySelector('[role="dialog"]'));
-  }
-};
-
-const handleOpen = (section, sectionId, noIncrement = false) => {
-  // prevent to open multiple modals in the same time, and keep only the freshest
+const openModal = (section, sectionId, increment = true) => {
+  // remove active modals
   const activeModals = document.querySelectorAll('[role="dialog"]');
-  if (activeModals) activeModals.forEach((item) => closeModal(item));
+  if (activeModals) activeModals.forEach((item) => removeModal(item));
 
-  // increment counter
-  if (!noIncrement) incrementCounter(getCounter(sectionId));
+  // increment coounter if it is necessary
+  if (increment) incrementCounter(getCounter(sectionId));
 
-  // create modal
-  const modal = createModal(section, sectionId, getCounter(sectionId));
-
-  // set focus to freshly created modal
+  // create modal, append it to section and set focus to modal
+  const modal = createModal(getCounter(sectionId), sectionId);
+  section.appendChild(modal);
   modal.focus();
 
-  // add closing function
-  modal.addEventListener("click", (e) => handleClose(e, modal));
-  window.addEventListener("keydown", handleEscapeKeyPress, true);
+  // add handle close modal by clicking
+  modal.addEventListener("click", (event) => handleCloseModal(event, modal));
+  // add handle close modal by escape key press
+  window.addEventListener("keydown", handleEscapeKeyPress);
 
-  // add reset counter function
+  // add actions after click resetButton in modal
   modal.addEventListener("click", ({ target }) => {
-    if (target === modal.querySelector('[data-name="resetButton"]')) {
+    const resetButton = modal.querySelector('[data-name="resetButton"]');
+    if (target === resetButton) {
       resetCounter(sectionId);
-      closeModal(modal);
-      handleOpen(section, sectionId, true);
+      removeModal(modal);
+      openModal(section, sectionId, false);
     }
   });
 };
 
-// For each section-with-image module ...
-sections.forEach((section, i) => {
-  // add unique id,
-  const sectionId = `swi${i}`;
-  section.dataset.name = sectionId;
+const initModals = (sections) => {
+  // for each section
+  sections.forEach((section, i) => {
+    // add unique sectionId
+    const sectionId = `swi${i}`;
+    section.dataset.name = sectionId;
 
-  // and add opening funciton
-  const openButton = section.querySelector('[data-name="openButton"]');
-  openButton.addEventListener("click", () => {
-    handleOpen(section, sectionId);
+    // add click handle function to opener button
+    const openButton = section.querySelector('[data-name="openButton"]');
+    openButton.addEventListener("click", () => openModal(section, sectionId));
   });
-});
+};
+
+// get all section.section-with-image
+const sections = document.querySelectorAll("section.section-with-image");
+initModals(sections);
