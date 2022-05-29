@@ -137,7 +137,7 @@ const initModals = (sections) => {
     const sectionId = `swi${i}`;
     section.dataset.name = sectionId;
 
-    // add click handle function to opener button
+    // add click handle function to opener button which open modal
     const openButton = section.querySelector('[data-name="openButton"]');
     openButton.addEventListener("click", () => openModal(section, sectionId));
   });
