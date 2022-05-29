@@ -111,7 +111,7 @@ const openModal = (section, sectionId, increment = true) => {
   // create modal, append it to section and set focus to modal
   const modal = createModal(getCounter(sectionId), sectionId);
   section.appendChild(modal);
-  modal.focus();
+  modal.querySelector("button").focus();
 
   // add handle close modal by clicking
   modal.addEventListener("click", (event) => handleCloseModal(event, modal));
