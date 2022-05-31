@@ -63,11 +63,18 @@ const createModal = async (counter, sectionId) => {
   document.body.appendChild(loader);
 
   const data = await getData(endpoint);
-  const tableWithData = createTable(data);
+
+  if (data) {
+    const tableWithData = createTable(data);
+    modalSection.appendChild(tableWithData);
+  } else {
+    const tableError = document.createElement("p");
+    tableError.classList.add("error");
+    tableError.innerText = "data loading error";
+    modalSection.appendChild(tableError);
+  }
 
   document.body.removeChild(loader);
-
-  modalSection.appendChild(tableWithData);
   modal.appendChild(modalSection);
 
   return modal;
@@ -206,7 +213,7 @@ const getData = async (url) => {
     fetch(url)
       .then((response) => response.json())
       // .then((data) => makeTable(data))
-      .catch((error) => console.log(error))
+      .catch((error) => false)
   );
 };
 
