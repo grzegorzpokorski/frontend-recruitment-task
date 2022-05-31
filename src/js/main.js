@@ -159,7 +159,6 @@ const initModals = (sections) => {
 };
 
 const createTable = (data) => {
-  console.log(data);
   const table = document.createElement("table");
   const heading = document.createElement("tr");
   const headingHTML =
