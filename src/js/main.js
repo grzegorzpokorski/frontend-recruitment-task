@@ -1,7 +1,13 @@
 "use strict";
 
+// get all section.section-with-image
+const sections = document.querySelectorAll("section.section-with-image");
+
+// api endpoint url
+const endpoint = "https://jsonplaceholder.typicode.com/users";
+
 // crete modal element and return it
-const createModal = (counter, sectionId) => {
+const createModal = async (counter, sectionId) => {
   const modal = document.createElement("aside");
   modal.classList.value = "modal";
   modal.setAttribute("role", "dialog");
@@ -53,6 +59,13 @@ const createModal = (counter, sectionId) => {
     modalSection.appendChild(modalButtonReset);
   }
 
+  const data = await getData(endpoint);
+  const tableWithData = createTable(data);
+
+  console.log(tableWithData);
+
+  modalSection.appendChild(tableWithData);
+
   modal.appendChild(modalSection);
 
   return modal;
@@ -101,7 +114,7 @@ const resetCounter = (id) => {
   localStorage.setItem(id, 0);
 };
 
-const openModal = (section, sectionId, increment = true) => {
+const openModal = async (section, sectionId, increment = true) => {
   // remove active modals
   const activeModals = document.querySelectorAll('[role="dialog"]');
   if (activeModals) activeModals.forEach((item) => removeModal(item));
@@ -110,7 +123,7 @@ const openModal = (section, sectionId, increment = true) => {
   if (increment) incrementCounter(getCounter(sectionId));
 
   // create modal, append it to section and set focus to modal
-  const modal = createModal(getCounter(sectionId), sectionId);
+  const modal = await createModal(getCounter(sectionId), sectionId);
   section.appendChild(modal);
   modal.querySelector("button").focus();
 
@@ -143,6 +156,55 @@ const initModals = (sections) => {
   });
 };
 
-// get all section.section-with-image
-const sections = document.querySelectorAll("section.section-with-image");
+const createTable = (data) => {
+  console.log(data);
+  const table = document.createElement("table");
+  const heading = document.createElement("tr");
+  const headingHTML =
+    "<td>imie i nazwisko</td><td>email</td><td>adres</td><td>telefon</td><td>nazwa firmy</td>";
+  heading.innerHTML = headingHTML;
+  table.appendChild(heading);
+
+  const createRow = (item) => {
+    const tr = document.createElement("tr");
+
+    const data = [
+      item.name,
+      item.email,
+      item.address.city +
+        ", " +
+        item.address.street +
+        ", " +
+        item.address.suite,
+      item.phone,
+      item.company.name,
+    ];
+
+    data.forEach((i) => {
+      const td = document.createElement("td");
+      td.innerText = i;
+      tr.appendChild(td);
+    });
+
+    return tr;
+  };
+
+  data.forEach((item) => {
+    table.appendChild(createRow(item));
+  });
+
+  return table;
+};
+
+const getData = async (url) => {
+  return (
+    fetch(url)
+      .then((response) => response.json())
+      // .then((data) => makeTable(data))
+      .catch((error) => console.log(error))
+  );
+};
+
+getData(endpoint);
+
 initModals(sections);
