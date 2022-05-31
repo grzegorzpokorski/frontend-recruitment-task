@@ -64,3 +64,9 @@ strong {
 :focus:not(:focus-visible) {
   outline: none;
 }
+
+table,
+tr,
+td {
+  border: 1px solid;
+}
