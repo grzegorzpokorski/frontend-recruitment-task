@@ -220,6 +220,4 @@ const createLoader = () => {
   return loader;
 };
 
-getData(endpoint);
-
 initModals(sections);
