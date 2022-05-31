@@ -269,4 +269,41 @@ td {
   background-color: black;
   transform: rotate(90deg);
 }
+.loader {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(18, 18, 18, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 11;
+}
+.loader__spinner {
+  border: 0.25rem solid var(--white);
+  border-radius: 50%;
+  border-top: 0.25rem solid var(--black);
+  width: 2rem;
+  height: 2rem;
+  -webkit-animation: spin 0.5s linear infinite;
+          animation: spin 0.5s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 /*# sourceMappingURL=main.css.map */

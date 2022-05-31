@@ -59,13 +59,15 @@ const createModal = async (counter, sectionId) => {
     modalSection.appendChild(modalButtonReset);
   }
 
+  const loader = createLoader();
+  document.body.appendChild(loader);
+
   const data = await getData(endpoint);
   const tableWithData = createTable(data);
 
-  console.log(tableWithData);
+  document.body.removeChild(loader);
 
   modalSection.appendChild(tableWithData);
-
   modal.appendChild(modalSection);
 
   return modal;
@@ -203,6 +205,19 @@ const getData = async (url) => {
       // .then((data) => makeTable(data))
       .catch((error) => console.log(error))
   );
+};
+
+const createLoader = () => {
+  const loader = document.createElement("div");
+  loader.classList.value = "loader";
+  loader.setAttribute("aria-hidden", "true");
+
+  const spinner = document.createElement("span");
+  spinner.classList.value = "loader__spinner";
+
+  loader.appendChild(spinner);
+
+  return loader;
 };
 
 getData(endpoint);
