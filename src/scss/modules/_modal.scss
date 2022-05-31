@@ -10,7 +10,8 @@
 
   &__content {
     position: relative;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     max-width: calc(100% - var(--gap-size) * 2);
     max-height: calc(100% - var(--gap-size) * 2);
     padding: 4rem 3rem;
@@ -55,5 +56,11 @@
 
   &__title {
     @extend .header__title;
+  }
+
+  &__table-wrapper {
+    width: 100%;
+    min-height: 100%;
+    overflow: auto;
   }
 }

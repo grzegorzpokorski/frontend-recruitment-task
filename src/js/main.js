@@ -159,6 +159,8 @@ const initModals = (sections) => {
 };
 
 const createTable = (data) => {
+  const tableWrapper = document.createElement("div");
+  tableWrapper.classList.value = "modal__table-wrapper";
   const table = document.createElement("table");
   const heading = document.createElement("tr");
   const headingHTML =
@@ -194,7 +196,9 @@ const createTable = (data) => {
     table.appendChild(createRow(item));
   });
 
-  return table;
+  tableWrapper.appendChild(table);
+
+  return tableWrapper;
 };
 
 const getData = async (url) => {
