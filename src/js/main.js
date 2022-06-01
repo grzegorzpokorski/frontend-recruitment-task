@@ -62,15 +62,14 @@ const createModal = async (counter, sectionId) => {
   const loader = createLoader();
   document.body.appendChild(loader);
 
-  const data = await getData(endpoint);
-
-  if (data) {
+  try {
+    const data = await getData(endpoint);
     const tableWithData = createTable(data);
     modalSection.appendChild(tableWithData);
-  } else {
+  } catch (error) {
     const tableError = document.createElement("p");
     tableError.classList.add("error");
-    tableError.innerText = "data loading error";
+    tableError.innerText = `data loading error`;
     modalSection.appendChild(tableError);
   }
 
