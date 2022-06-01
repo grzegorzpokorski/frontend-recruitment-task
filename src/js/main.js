@@ -69,7 +69,7 @@ const createModal = async (counter, sectionId) => {
   } catch (error) {
     const tableError = document.createElement("p");
     tableError.classList.add("error");
-    tableError.innerText = `data loading error`;
+    tableError.innerText = "data loading error";
     modalSection.appendChild(tableError);
   }
 
@@ -208,12 +208,9 @@ const createTable = (data) => {
 };
 
 const getData = async (url) => {
-  return (
-    fetch(url)
-      .then((response) => response.json())
-      // .then((data) => makeTable(data))
-      .catch((error) => false)
-  );
+  return fetch(url)
+    .then((response) => response.json())
+    .catch((error) => error);
 };
 
 const createLoader = () => {
