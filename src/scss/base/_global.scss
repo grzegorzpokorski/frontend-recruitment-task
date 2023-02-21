@@ -1,0 +1,76 @@
+:root {
+  font-size: 16px;
+
+  --font-family-serif: "Roboto", sans-serif;
+  --font-weight-bold: 700;
+  --font-weight-light: 300;
+
+  --gap-size: 0.75rem;
+
+  @include colors($colors);
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+p,
+h2,
+h3,
+picture,
+img,
+button {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 1rem;
+  font-family: var(--font-family-serif);
+  font-weight: var(--font-weight-light);
+  line-height: 1.5;
+}
+
+body {
+  background-color: var(--white);
+  color: var(--black);
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+button {
+  appearance: none;
+  cursor: pointer;
+  border: none;
+}
+
+strong {
+  font-weight: var(--font-weight-bold);
+}
+
+:focus,
+:focus-visible {
+  outline: 0.125rem dashed red;
+  outline-offset: 0.25rem;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+table,
+tr,
+td {
+  border: 1px solid;
+}
+
+.error {
+  color: var(--red);
+}

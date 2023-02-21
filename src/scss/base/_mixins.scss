@@ -1,0 +1,6 @@
+@mixin colors($map) {
+  @each $name, $value in $map {
+    --#{$name}: #{$value};
+    --#{$name}-darken: #{darken($value, 10%)};
+  }
+}

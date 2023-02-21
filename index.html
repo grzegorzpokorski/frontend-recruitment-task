@@ -1,11 +1,69 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>[Name] [Surname] - Recruitment task</title>
-</head>
-<body>
-
-</body>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Grzegorz Pokorski - Recruitment task</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./dist/main.css" />
+  </head>
+  <body>
+    <a href="#content" class="skip-link">Skip to content</a>
+    <main id="content" class="wrapper">
+      <section class="section-with-image" id="first-section-with-image">
+        <picture class="picture picture--section-with-image">
+          <source
+            srcset="
+              ./images/sean-o-KMn4VEeEPR8-unsplash_1_s6zmfh_ar_1_1,c_fill,g_auto__c_scale,w_200.jpg
+            "
+            media="(max-width: 201px)"
+          />
+          <source
+            srcset="
+              ./images/sean-o-KMn4VEeEPR8-unsplash_1_s6zmfh_ar_1_1,c_fill,g_auto__c_scale,w_450.jpg
+            "
+            media="(max-width: 451px)"
+          />
+          <source
+            srcset="
+              ./images/sean-o-KMn4VEeEPR8-unsplash_1_s6zmfh_ar_4_3,c_fill,g_auto__c_scale,w_538.jpg
+            "
+            media="(max-width: 631px)"
+          />
+          <source
+            srcset="
+              ./images/sean-o-KMn4VEeEPR8-unsplash_1_s6zmfh_c_scale,w_784.jpg
+            "
+            media="(min-width: 767px)"
+          />
+          <img
+            src="./images/sean-o-KMn4VEeEPR8-unsplash_1_s6zmfh_c_scale,w_480.jpg"
+            alt="beautiful sunset over the sea"
+            loading="lazy"
+            class="picture__image"
+            width="505"
+            height="330"
+          />
+        </picture>
+        <header class="header header--section-with-image">
+          <h2 class="header__title">Lorem ipsum</h2>
+          <p>
+            Infinitely scalable, feature-rich and cloud-native data management
+            and protection for modern and legacy infrastructures and SaaS
+            platforms, managed via a single app with no hardware required.
+          </p>
+          <button class="button button--margin-top" data-name="openButton">
+            Button
+          </button>
+        </header>
+      </section>
+    </main>
+    <script type="text/javascript" src="./dist/all.js" defer></script>
+  </body>
+</html>

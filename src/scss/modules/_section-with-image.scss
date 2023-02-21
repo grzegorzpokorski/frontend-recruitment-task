@@ -1,0 +1,15 @@
+.section-with-image {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+
+  padding: 96px 0;
+
+  @media #{map-get($breakpoints-from, 'lg')} {
+    flex-direction: row;
+    align-items: center;
+    gap: 95px;
+  }
+}
