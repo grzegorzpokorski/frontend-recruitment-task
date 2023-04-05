@@ -81,7 +81,7 @@ const createModal = async (counter, sectionId) => {
 
 const handleCloseModal = ({ target }, modal) => {
   const closeButton = modal.querySelector('[data-name="closeButton"]');
-  if(closeButton.contains(target)){
+  if(closeButton.contains(target) || target === modal){
     removeModal(modal);
   }
 };
