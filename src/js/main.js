@@ -2,6 +2,7 @@
 
 // get all section.section-with-image
 const sections = document.querySelectorAll("section.section-with-image");
+const main = document.querySelector('main');
 
 // api endpoint url
 const endpoint = "https://jsonplaceholder.typicode.com/users";
@@ -95,6 +96,7 @@ const handleEscapeKeyPress = ({ key }) => {
 const removeModal = (modal) => {
   modal.remove();
   window.removeEventListener("keydown", handleEscapeKeyPress);
+  main.removeAttribute('inert')
 };
 
 const getCounter = (id) => {
@@ -123,7 +125,7 @@ const openModal = async (section, sectionId, increment = true) => {
 
   // create modal, append it to section and set focus to modal
   const modal = await createModal(getCounter(sectionId), sectionId);
-  section.appendChild(modal);
+  document.body.appendChild(modal);
   modal.querySelector("button").focus();
 
   // add handle close modal by clicking
@@ -140,6 +142,9 @@ const openModal = async (section, sectionId, increment = true) => {
       openModal(section, sectionId, false);
     }
   });
+
+  // trap focus in opened modal
+  main.setAttribute('inert', 'true')
 };
 
 const initModals = (sections) => {
