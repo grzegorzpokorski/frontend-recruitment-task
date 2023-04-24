@@ -1,11 +1,50 @@
 "use strict";
 
+import Ajv from "ajv";
+const ajv = new Ajv();
+
 // get all section.section-with-image
 const sections = document.querySelectorAll("section.section-with-image");
-const main = document.querySelector('main');
+const main = document.querySelector("main");
 
 // api endpoint url
 const endpoint = "https://jsonplaceholder.typicode.com/users";
+
+const dataIsValid = (data) => {
+  if (!Array.isArray(data)) return false;
+
+  const schema = {
+    type: "object",
+    properties: {
+      name: { type: "string" },
+      email: { type: "string" },
+      address: {
+        type: "object",
+        properties: {
+          street: { type: "string" },
+          suite: { type: "string" },
+          city: { type: "string" },
+        },
+        required: ["street", "suite", "city"],
+      },
+      phone: { type: "string" },
+      company: {
+        type: "object",
+        properties: {
+          name: { type: "string" },
+        },
+        required: ["name"],
+      },
+    },
+    required: ["name", "email", "address", "phone", "company"],
+    additionalProperties: true,
+  };
+  const validate = ajv.compile(schema);
+  const resultOfValidationEachItem = data.map((item) => validate(item));
+
+  if (resultOfValidationEachItem.some((item) => item === false)) return false;
+  return true;
+};
 
 // crete modal element and return it
 const createModal = async (counter, sectionId) => {
@@ -65,12 +104,16 @@ const createModal = async (counter, sectionId) => {
 
   try {
     const data = await getData(endpoint);
+
+    if (!dataIsValid(data)) throw Error("Recieved data is invalid");
+
     const tableWithData = createTable(data);
     modalSection.appendChild(tableWithData);
   } catch (error) {
     const tableError = document.createElement("p");
     tableError.classList.add("error");
-    tableError.innerText = `data loading error [${error.message}]`;
+    tableError.innerText = `data loading error`;
+    console.log(error);
     modalSection.appendChild(tableError);
   }
 
@@ -82,7 +125,7 @@ const createModal = async (counter, sectionId) => {
 
 const handleCloseModal = ({ target }, modal) => {
   const closeButton = modal.querySelector('[data-name="closeButton"]');
-  if(closeButton.contains(target) || target === modal){
+  if (closeButton.contains(target) || target === modal) {
     removeModal(modal);
   }
 };
@@ -96,7 +139,7 @@ const handleEscapeKeyPress = ({ key }) => {
 const removeModal = (modal) => {
   modal.remove();
   window.removeEventListener("keydown", handleEscapeKeyPress);
-  main.removeAttribute('inert')
+  main.removeAttribute("inert");
 };
 
 const getCounter = (id) => {
@@ -144,7 +187,7 @@ const openModal = async (section, sectionId, increment = true) => {
   });
 
   // trap focus in opened modal
-  main.setAttribute('inert', 'true')
+  main.setAttribute("inert", "true");
 };
 
 const initModals = (sections) => {
