@@ -258,6 +258,7 @@ const createLoader = () => {
 
   const spinner = document.createElement("span");
   spinner.classList.value = "loader__spinner";
+  spinner.innerText = "ładowanie danych";
 
   loader.appendChild(spinner);
 

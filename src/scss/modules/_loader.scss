@@ -15,6 +15,23 @@
     width: 2rem;
     height: 2rem;
     animation: spin 0.5s linear infinite;
+    text-indent: -9999px;
+    white-space: nowrap;
+  }
+
+  @media (prefers-reduced-motion) {
+    &__spinner {
+      border: none;
+      border-radius: 0;
+      width: auto;
+      height: auto;
+      animation: none;
+      background-color: white;
+      padding: 0.5em 1em;
+      position: relative;
+      text-indent: 0;
+      white-space: normal;
+    }
   }
 }
 
