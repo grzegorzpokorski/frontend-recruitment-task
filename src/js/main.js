@@ -140,6 +140,7 @@ const removeModal = (modal) => {
   modal.remove();
   window.removeEventListener("keydown", handleEscapeKeyPress);
   main.removeAttribute("inert");
+  document.body.classList.remove("overflow-hidden");
 };
 
 const getCounter = (id) => {
@@ -188,6 +189,7 @@ const openModal = async (section, sectionId, increment = true) => {
 
   // trap focus in opened modal
   main.setAttribute("inert", "true");
+  document.body.classList.add("overflow-hidden");
 };
 
 const initModals = (sections) => {

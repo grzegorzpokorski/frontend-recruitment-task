@@ -33,6 +33,7 @@ html {
   font-family: var(--font-family-serif);
   font-weight: var(--font-weight-light);
   line-height: 1.5;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -73,4 +74,8 @@ td {
 
 .error {
   color: var(--red);
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
